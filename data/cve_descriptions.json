@@ -1,0 +1,29 @@
+{
+  "CVE-2024-40725": "Source code disclosure vulnerability in Apache HTTP Server. Certain handlers like AddType could unintentionally expose local files to remote users.",
+  "CVE-2024-40898": "Server-Side Request Forgery (SSRF) in Apache mod_rewrite on Windows. Allows crafted URLs to trigger unwanted outbound requests.",
+  
+  "CVE-2021-42013": "Path traversal and Remote Code Execution in Apache 2.4.50/51. Attackers can access restricted files or execute arbitrary commands.",
+  "CVE-2021-41773": "Path traversal in Apache 2.4.49. Allows attackers to read arbitrary files via crafted URLs.",
+
+  "CVE-2020-11984": "Buffer overflow in Apache mod_md. Attackers may trigger memory corruption related to ACME certificate renewal.",
+  "CVE-2020-9490": "Denial of Service in Apache HTTP/2 (mod_http2). Malicious requests can exhaust server resources.",
+
+  "CVE-2018-16843": "Heap buffer overflow in nginx HTTP/2 implementation. Attackers can trigger crashes or DoS.",
+  "CVE-2018-16844": "Stack buffer vulnerability in nginx HTTP/2, possibly leading to memory corruption.",
+  "CVE-2018-16845": "NULL pointer dereference in nginx HTTP/2. Malformed requests can cause server crash.",
+  
+  "CVE-2019-20372": "Memory corruption in nginx. Crafted input could cause segmentation faults and DoS.",
+
+  "CVE-2019-11043": "PHP-FPM remote code execution via crafted path. Extremely serious vulnerability allowing attackers to execute code on the server.",
+  "CVE-2022-31630": "PHP buffer overflow in password hashing. Incorrect memory handling can lead to DoS or arbitrary code execution.",
+  "CVE-2022-37454": "PHP hash table collision bug (XXH3). Certain input can lead to integer overflow or unexpected behavior.",
+
+  "CVE-2019-11041": "Use-after-free in PHP EXIF metadata handling, may allow reading unintended memory.",
+  "CVE-2018-19935": "Memory corruption in PHP PHAR processing. Crafted archives may trigger malicious behavior.",
+
+  "CVE-2021-29447": "XXE (XML External Entity) vulnerability in WordPress Media Library. Can leak internal files.",
+  "CVE-2022-21661": "SQL injection in WordPress WP_Query. Attackers may manipulate database queries.",
+  
+  "CVE-2022-21664": "Object injection vulnerability in WordPress. Untrusted input may lead to unintended code execution.",
+  "CVE-2022-21662": "WordPress core vulnerability related to REST API handling. Insufficient sanitization may leak sensitive data."
+}
