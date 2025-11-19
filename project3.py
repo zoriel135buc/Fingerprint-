@@ -8,6 +8,8 @@ from fingerprint import (
     get_powered_by,
     fingerprint_cookies,)
 from vuln_lookup import load_vuln_db, find_vulns
+from nvd_client import fetch_cves_from_nvd
+from db_update import update_local_db_with_nvd_results
 RED = "\033[91m"
 GREEN = "\033[92m"
 YELLOW = "\033[93m"
@@ -80,15 +82,29 @@ for name, info in candidates.items():
     vulns = find_vulns(db, name, ver_key)
     
 
-    if vulns is None:
-        print(f"{RED}[!] No DB entry for product: {name}{RESET}")
+    if vulns is not None and vulns:
+        print(f"{GREEN}[*] Known vulnerabilities for {name} {ver_key}:{RESET}")
+        for cve in vulns:
+            desc = CVE_DESC.get(cve, "No description available.")
+            print(f"    - {GREEN}{cve}{YELLOW}: {desc}{RESET}")
         continue
 
-    if not vulns:
-        print(f"{RED}[!] No CVEs for {name} {ver_key}{RESET}")
+        
+
+    print(f"{YELLOW}[!] No local CVEs for {name} {ver_key} — trying NVD online...{RESET}")
+    nvd_cves = fetch_cves_from_nvd(server_header)
+
+
+    if not nvd_cves:
+        print(f"{RED}[!] No CVEs found in NVD for: {name} {ver_key}{RESET}")
         continue
 
-    print(f"{GREEN} Known vulnerabilities for {name} {ver_key}:{RESET}")
-    for cve in vulns:
-        desc=CVE_DESC.get(cve,"No description available.")
-        print(f"{YELLOW}- {cve}:{desc}{RESET}")
+    print(f"{GREEN}[*] NVD results for {name} {ver_key} ({len(nvd_cves)} CVEs):{RESET}")
+    for cve_id, desc in nvd_cves:
+        first_line = desc.split("\n")[0].strip()
+        if len(first_line) > 180:
+            first_line = first_line[:180] + "..."
+    print(f"    - {YELLOW}{cve_id}: {first_line}{RESET}")
+
+
+    update_local_db_with_nvd_results(name, ver_key, nvd_cves)
