@@ -78,3 +78,5 @@ Check Python:
 '''bash
 python --version
 
+## 4.to activate:
+# python (file.py) -u("enter the url")
