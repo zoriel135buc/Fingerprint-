@@ -79,4 +79,4 @@ Check Python:
 python --version
 
 ## 4.to activate:
-# python (file.py) -u("enter the url")
+python (file.py) -u("enter the url")
